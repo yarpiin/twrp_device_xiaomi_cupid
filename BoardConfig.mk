@@ -142,11 +142,12 @@ TARGET_USES_LOGD := true
 TW_NO_SCREEN_BLANK := true
 TW_Y_OFFSET := 90
 TW_H_OFFSET := -90
-TW_DEVICE_VERSION := White Wolf A12
+TW_DEVICE_VERSION := White Wolf A12 v1
 TW_EXCLUDE_APEX := true
 TW_INCLUDE_PYTHON := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_LIBRESETPROP := true
+TW_NO_HAPTICS := true
 
 # Load kernel modules for touch & vibrator
 TW_LOAD_VENDOR_MODULES := "aw8697-haptic.ko atmel_mxt_ts.ko focaltech_fts.ko fts_touch_spi.ko nt36xxx-i2c.ko nt36xxx-spi.ko synaptics_dsx.ko xiaomi_touch.ko"
