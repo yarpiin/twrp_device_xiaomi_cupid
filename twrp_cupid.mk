@@ -17,7 +17,7 @@ $(call inherit-product, device/xiaomi/cupid/device.mk)
 PRODUCT_DEVICE := cupid
 PRODUCT_NAME := twrp_cupid
 PRODUCT_BRAND := Xiaomi
-PRODUCT_MODEL := Mi 12
+PRODUCT_MODEL := Xiaomi 12
 PRODUCT_MANUFACTURER := xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
