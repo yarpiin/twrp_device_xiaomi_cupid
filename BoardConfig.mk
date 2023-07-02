@@ -142,15 +142,16 @@ TARGET_USES_LOGD := true
 TW_NO_SCREEN_BLANK := true
 TW_Y_OFFSET := 90
 TW_H_OFFSET := -90
-TW_DEVICE_VERSION := White Wolf A12 v1
+TW_DEVICE_VERSION := White Wolf A12 v2
 TW_EXCLUDE_APEX := true
 TW_INCLUDE_PYTHON := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_LIBRESETPROP := true
-TW_NO_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS := true
+TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
 
 # Load kernel modules for touch & vibrator
-TW_LOAD_VENDOR_MODULES := "aw8697-haptic.ko atmel_mxt_ts.ko focaltech_fts.ko fts_touch_spi.ko nt36xxx-i2c.ko nt36xxx-spi.ko synaptics_dsx.ko xiaomi_touch.ko"
+BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
 
 # The path to a temperature sensor
 TW_CUSTOM_CPU_TEMP_PATH := "/sys/devices/virtual/thermal/thermal_zone50/temp"

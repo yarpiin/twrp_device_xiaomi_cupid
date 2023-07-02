@@ -21,19 +21,46 @@
       "File": "audio-app/cpus"
     },
     {
+      "Name": "MemStats",
+      "Controller": "memory",
+      "File": "memory.stat"
+    },
+    {
       "Name": "MemLimit",
       "Controller": "memory",
-      "File": "memory.limit_in_bytes"
+      "File": "memory.limit_in_bytes",
+      "FileV2": "memory.max"
     },
     {
       "Name": "MemSoftLimit",
       "Controller": "memory",
-      "File": "memory.soft_limit_in_bytes"
+      "File": "memory.soft_limit_in_bytes",
+      "FileV2": "memory.low"
     },
     {
       "Name": "MemSwappiness",
       "Controller": "memory",
       "File": "memory.swappiness"
+    },
+    {
+      "Name": "MemUsage",
+      "Controller": "memory",
+      "File": "memory.usage_in_bytes"
+    },
+    {
+      "Name": "MemAndSwapUsage",
+      "Controller": "memory",
+      "File": "memory.memsw.usage_in_bytes"
+    },
+    {
+      "Name": "MemPressureLevel",
+      "Controller": "memory",
+      "File": "memory.pressure_level"
+    },
+    {
+      "Name": "MemCgroupEventControl",
+      "Controller": "memory",
+      "File": "cgroup.event_control"
     },
     {
       "Name": "UClampMin",
@@ -176,6 +203,19 @@
       ]
     },
     {
+      "Name": "AudioAppPerformance",
+      "Actions" : [
+        {
+          "Name" : "JoinCgroup",
+          "Params" :
+          {
+            "Controller": "schedtune",
+            "Path": "audio-app"
+          }
+        }
+      ]
+    },
+    {
       "Name": "NNApiHALPerformance",
       "Actions": [
         {
@@ -189,19 +229,18 @@
       ]
     },
     {
-      "Name": "AudioAppPerformance",
-      "Actions" : [
+      "Name": "Dex2oatPerformance",
+      "Actions": [
         {
-          "Name" : "JoinCgroup",
-          "Params" :
+          "Name": "JoinCgroup",
+          "Params":
           {
-            "Controller": "schedtune",
-            "Path": "audio-app"
+            "Controller": "cpu",
+            "Path": "dex2oat"
           }
         }
       ]
     },
-
     {
       "Name": "CpuPolicySpread",
       "Actions": [
@@ -400,7 +439,6 @@
         }
       ]
     },
-
     {
       "Name": "CameraServiceCapacity",
       "Actions": [
@@ -414,7 +452,85 @@
         }
       ]
     },
+    {
+      "Name": "CameraProcessCapacityLow",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpuset",
+            "Path": "camera-background"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "CameraProcessCapacityLower",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpuset",
+            "Path": "camera-background/background"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "CameraProcessCapacityLowest",
+      "Actions": [
+        {
+          "Name": "JoinCgroup",
+          "Params":
+          {
+            "Controller": "cpuset",
+            "Path": "camera-background/limit"
+          }
+        }
+      ]
+    },
+    {
+      "Name": "AudioAppCapacity",
+      "Actions" : [
+        {
+          "Name" : "JoinCgroup",
+          "Params" :
+          {
+            "Controller": "cpuset",
+            "Path": "audio-app"
+          }
+        }
+      ]
+    },
 
+    {
+      "Name": "BlkIOForeground",
+      "Actions" : [
+        {
+          "Name" : "JoinCgroup",
+          "Params" :
+          {
+            "Controller": "blkio",
+            "Path": ""
+          }
+        }
+      ]
+    },
+    {
+      "Name": "BlkIOBackground",
+      "Actions" : [
+        {
+          "Name" : "JoinCgroup",
+          "Params" :
+          {
+            "Controller": "blkio",
+            "Path": "bg"
+          }
+        }
+      ]
+    },
     {
       "Name": "LowIoPriority",
       "Actions": [
@@ -467,45 +583,7 @@
         }
       ]
     },
-    {
-      "Name": "AudioAppCapacity",
-      "Actions" : [
-        {
-          "Name" : "JoinCgroup",
-          "Params" :
-          {
-            "Controller": "cpuset",
-            "Path": "audio-app"
-          }
-        }
-      ]
-    },
-    {
-      "Name": "BlkIOForeground",
-      "Actions" : [
-        {
-          "Name" : "JoinCgroup",
-          "Params" :
-          {
-            "Controller": "blkio",
-            "Path": ""
-          }
-        }
-      ]
-    },
-    {
-      "Name": "BlkIOBackground",
-      "Actions" : [
-        {
-          "Name" : "JoinCgroup",
-          "Params" :
-          {
-            "Controller": "blkio",
-            "Path": "bg"
-          }
-        }
-      ]
-    },
+
     {
       "Name": "TimerSlackHigh",
       "Actions": [
@@ -665,6 +743,10 @@
       "Profiles": [ "ServicePerformance", "LowIoPriority", "TimerSlackNormal" ]
     },
     {
+      "Name": "VMCompilationPerformance",
+      "Profiles": [ "HighPerformance", "ProcessCapacityHigh", "LowIoPriority", "TimerSlackNormal" ]
+    },
+    {
       "Name": "SCHED_SP_RT_APP",
       "Profiles": [ "RealtimePerformance", "MaxIoPriority", "TimerSlackNormal" ]
     },
@@ -694,7 +776,23 @@
     },
     {
       "Name": "Dex2OatBootComplete",
-      "Profiles": [ "SCHED_SP_BACKGROUND" ]
+      "Profiles": [ "Dex2oatPerformance", "LowIoPriority", "TimerSlackHigh" ]
+    },
+    {
+      "Name": "OtaProfiles",
+      "Profiles": [ "ServiceCapacityLow", "LowIoPriority", "HighEnergySaving" ]
+    },
+    {
+      "Name": "CPUSET_SP_CAMERA_BACKGROUND",
+      "Profiles": [ "CameraProcessCapacityLow"]
+    },
+    {
+      "Name": "CPUSET_SP_CAMERA_LOWER_BACKGROUND",
+      "Profiles": [ "CameraProcessCapacityLower"]
+    },
+    {
+      "Name": "CPUSET_SP_CAMERA_LIMIT_BACKGROUND",
+      "Profiles": [ "HighEnergySaving", "CameraProcessCapacityLowest", "LowIoPriority", "TimerSlackHigh" ]
     }
   ]
 }
