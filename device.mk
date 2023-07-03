@@ -71,6 +71,11 @@ PRODUCT_PACKAGES += \
     f2fs_io \
     check_f2fs
 
+# Health HAL
+PRODUCT_PACKAGES += \
+    android.hardware.health@2.1-service \
+    android.hardware.health@2.1-impl
+
 # Platform
 TARGET_BOARD_PLATFORM := taro
 TARGET_BOOTLOADER_BOARD_NAME := taro
