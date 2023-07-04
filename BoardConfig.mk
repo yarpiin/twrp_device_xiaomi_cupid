@@ -135,22 +135,28 @@ TW_EXTRA_LANGUAGES := true
 TW_INCLUDE_NTFS_3G := true
 TW_USE_TOOLBOX := true
 TW_INPUT_BLACKLIST := "hbtp_vm"
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
-TW_MAX_BRIGHTNESS := 2047
-TW_DEFAULT_BRIGHTNESS := 1024
 TWRP_INCLUDE_LOGCAT := true
 TARGET_USES_LOGD := true
-TW_NO_SCREEN_BLANK := true
-TW_Y_OFFSET := 90
-TW_H_OFFSET := -90
-TW_DEVICE_VERSION := White Wolf v2
 TW_EXCLUDE_APEX := true
 TW_INCLUDE_PYTHON := true
 TW_INCLUDE_RESETPROP := true
 TW_INCLUDE_LIBRESETPROP := true
+
+# TWRP Display flags
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
+TW_MAX_BRIGHTNESS := 2047
+TW_DEFAULT_BRIGHTNESS := 1024
+TW_NO_SCREEN_BLANK := true
+TW_Y_OFFSET := 90
+TW_H_OFFSET := -90
+
+# TWRP Haptics
 TW_SUPPORT_INPUT_AIDL_HAPTICS := true
 TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
 TW_EXCLUDE_TWRPAPP := true
+
+# TWRP Version
+TW_DEVICE_VERSION := White Wolf v2
 
 # Load kernel modules for touch & vibrator
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
