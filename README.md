@@ -32,10 +32,7 @@ Works:
 - [X] Sideload (adb sideload update.zip)
 - [X] Reboot to bootloader/recovery/system/fasbootd
 - [X] F2FS/EXT4 Support
-
-Not working:
-
-- [ ] Vibration support
+- [x] Vibration support
 
 ## Compile
 
