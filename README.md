@@ -36,28 +36,34 @@ Works:
 
 ## Compile
 
-First checkout minimal twrp with aosp tree:
+Sync OrangeFox sources and minimal manifest:
 
 ```
-repo init -u https://github.com/minimal-manifest-twrp/platform_manifest_twrp_aosp.git -b twrp-12.1
-repo sync
+mkdir ~/OrangeFox_sync
+cd ~/OrangeFox_sync
+git clone https://gitlab.com/OrangeFox/sync.git # (or, using ssh, "git clone git@gitlab.com:OrangeFox/sync.git")
+cd ~/OrangeFox_sync/sync/
+./orangefox_sync.sh --branch 12.1 --path ~/fox_12.1
 ```
 
 Then add these projects to .repo/manifest.xml:
 
 ```xml
-<project path="device/xiaomi/cupid" name="yarpiin/twrp_device_xiaomi_cupid" remote="github" revision="android-12.1" />
+<project path="device/xiaomi/cupid" name="yarpiin/twrp_device_xiaomi_cupid" remote="github" revision="ofrp-12.1" />
 ```
 
 Finally execute these:
 
 ```
-. build/envsetup.sh
-lunch twrp_cupid-eng
-mka recoveryimage ALLOW_MISSING_DEPENDENCIES=true # Only if you use minimal twrp tree.
+  source build/envsetup.sh
+  export ALLOW_MISSING_DEPENDENCIES=true
+  export FOX_BUILD_DEVICE=<device>
+  export LC_ALL="C"
+
+  lunch twrp_cupid-eng && mka adbd recoveryimage
 
 ```
 ## To use it:
 
 ```
-fastboot flash recovery out/target/product/cupid/recovery.img
+fastboot flash recovery out/target/product/cupid/<recovery-name>.img
