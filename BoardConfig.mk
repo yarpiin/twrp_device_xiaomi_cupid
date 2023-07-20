@@ -147,6 +147,9 @@ TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel0-backlight/brightness"
 TW_MAX_BRIGHTNESS := 2047
 TW_DEFAULT_BRIGHTNESS := 1024
 TW_NO_SCREEN_BLANK := true
+
+# Theme
+TW_STATUS_ICONS_ALIGN := center
 TW_Y_OFFSET := 90
 TW_H_OFFSET := -90
 
