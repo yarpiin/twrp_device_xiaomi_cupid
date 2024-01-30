@@ -160,7 +160,7 @@ TW_SUPPORT_INPUT_AIDL_HAPTICS_FQNAME := "IVibrator/vibratorfeature"
 TW_EXCLUDE_TWRPAPP := true
 
 # TWRP Version
-TW_DEVICE_VERSION := White Wolf v6
+TW_DEVICE_VERSION := White Wolf v7
 
 # Load kernel modules for touch & vibrator
 BOARD_VENDOR_RAMDISK_RECOVERY_KERNEL_MODULES_LOAD := $(strip $(shell cat $(DEVICE_PATH)/modules.load.recovery))
