@@ -57,6 +57,9 @@ on fs
     chown system system /dev/ion
     install_keyring
 
+on boot
+    setprop sys.usb.config adb
+
 on property:twrp.modules.loaded=true
     start touch_report
     start touchsensor
@@ -69,6 +72,3 @@ on property:twrp.modules.loaded=true
     wait /sys/class/power_supply/battery
     start health-hal-2-1
     umount /firmware
-
-
-
